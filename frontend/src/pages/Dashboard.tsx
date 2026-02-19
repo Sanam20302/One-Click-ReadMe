@@ -142,7 +142,7 @@ const Dashboard: React.FC = () => {
                                         className={`flex items-center px-6 py-2 rounded-md text-white font-medium transition-all ${generating || publishing ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 shadow-md transform hover:scale-105'}`}
                                     >
                                         {publishing ? <Loader2 className="animate-spin w-5 h-5 mr-2" /> : <Rocket className="w-5 h-5 mr-2" />}
-                                        {publishing ? 'Publishing...' : 'Ship It!'}
+                                        {publishing ? 'Publishing...' : 'Commit'}
                                     </button>
                                 )}
                             </div>
@@ -159,13 +159,28 @@ const Dashboard: React.FC = () => {
                                 <div className="flex flex-col items-center justify-center h-64 text-gray-500">
                                     <Loader2 className="w-12 h-12 mb-4 text-blue-500 animate-spin" />
                                     <p className="text-lg font-medium">Analyzing repository & generating README...</p>
-                                    <p className="text-sm mt-2">This usually takes 10-20 seconds.</p>
                                 </div>
                             ) : (
                                 <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-8 min-h-[500px]">
                                     {previewContent ? (
                                         <article className="prose prose-blue max-w-none">
-                                            <ReactMarkdown>{previewContent}</ReactMarkdown>
+                                            <ReactMarkdown
+                                                components={{
+                                                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mt-6 mb-4 border-b pb-2" {...props} />,
+                                                    h2: ({ node, ...props }) => <h2 className="text-2xl font-semibold mt-5 mb-3" {...props} />,
+                                                    h3: ({ node, ...props }) => <h3 className="text-xl font-medium mt-4 mb-2" {...props} />,
+                                                    p: ({ node, ...props }) => <p className="mb-4 leading-relaxed" {...props} />,
+                                                    ul: ({ node, ...props }) => <ul className="list-disc list-inside mb-4" {...props} />,
+                                                    ol: ({ node, ...props }) => <ol className="list-decimal list-inside mb-4" {...props} />,
+                                                    li: ({ node, ...props }) => <li className="mb-1" {...props} />,
+                                                    a: ({ node, ...props }) => <a className="text-blue-600 hover:underline" {...props} />,
+                                                    blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-gray-300 pl-4 italic my-4" {...props} />,
+                                                    code: ({ node, ...props }) => <code className="bg-gray-100 rounded px-1 py-0.5 font-mono text-sm" {...props} />,
+                                                    pre: ({ node, ...props }) => <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4" {...props} />,
+                                                }}
+                                            >
+                                                {previewContent}
+                                            </ReactMarkdown>
                                         </article>
                                     ) : (
                                         <div className="text-center text-gray-400 py-20">Select a repository to generate a README</div>

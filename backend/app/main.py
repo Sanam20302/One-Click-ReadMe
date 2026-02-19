@@ -21,4 +21,4 @@ app.include_router(endpoints.router, prefix="/api", tags=["api"])
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to README Generator API"}
+    return {"message": "Welcome to README Generator"}
