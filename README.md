@@ -7,6 +7,27 @@ Small web app to generate README files by scanning GitHub repositories and using
 - Backend: [backend](backend)
 - Frontend: [frontend](frontend)
 
+**Tech Stacks**
+
+- **Backend:**
+	- **Python & FastAPI:** primary language and web framework for the API and routers.
+	- **Uvicorn:** ASGI server for running the FastAPI app.
+	- **python-dotenv:** manage environment variables during development.
+	- **HTTPX:** HTTP client used for external requests (e.g., GitHub API).
+	- **pydantic-settings:** configuration and settings validation.
+	- **OpenAI (or LLM client):** used by the `llm_service` for README generation prompts.
+
+- **Frontend:**
+	- **React:** UI library for building the single-page application.
+	- **TypeScript:** static typing for frontend code.
+	- **Vite:** development server and build tool.
+	- **Tailwind CSS & PostCSS:** utility-first styling and CSS processing.
+	- **Axios:** HTTP client used to communicate with the backend API.
+	- **React Router:** client-side routing for pages like `Login`, `Callback`, and `Dashboard`.
+	- **react-markdown:** render generated README content as Markdown in the UI.
+	- **lucide-react, clsx, tailwind-merge:** UI utilities and iconography helpers.
+
+
 Key backend files:
 - [backend/requirements.txt](backend/requirements.txt)
 - [backend/app/main.py](backend/app/main.py)
